@@ -14,7 +14,7 @@ class Tenant:
     owner_user_id: int
 
 
-# Demo data only. In production this is a DB lookup keyed by telegram user id.
+# Demo data only. In production this is a DB lookup keyed by messaging user id.
 _TENANTS: tuple[Tenant, ...] = (
     Tenant(
         tenant_id="acme",
@@ -35,8 +35,8 @@ _TENANTS: tuple[Tenant, ...] = (
 _BY_USER = {t.owner_user_id: t for t in _TENANTS}
 
 
-def resolve_tenant(telegram_user_id: int | None) -> Tenant | None:
-    """Map a Telegram user to exactly one tenant, or None if unmapped."""
-    if telegram_user_id is None:
+def resolve_tenant(messaging_user_id: int | None) -> Tenant | None:
+    """Map a messaging user to exactly one tenant, or None if unmapped."""
+    if messaging_user_id is None:
         return None
-    return _BY_USER.get(telegram_user_id)
+    return _BY_USER.get(messaging_user_id)

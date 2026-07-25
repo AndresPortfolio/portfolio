@@ -1,4 +1,4 @@
-# Content scheduling system
+# Automated scheduling system
 
 ## Problem
 
@@ -8,10 +8,10 @@ Manual publishing across accounts doesn’t scale and is error-prone. Scheduling
 
 A scheduler oriented around:
 
-- Per-account queues and publish windows  
-- Deliberate action delays (rate / safety pacing)  
-- Browser automation for platforms that don’t offer a clean public API path  
-- Hard separation between test runs and live account targets  
+- Per-account queues and publish windows
+- Deliberate action delays (rate / safety pacing)
+- Browser automation for platforms that don’t offer a clean public API path
+- Hard separation between test runs and live account targets
 
 ## Architecture (high level)
 
@@ -33,9 +33,9 @@ Account resolution goes through registries — never “remembered ports” or a
 
 ## Decisions that mattered
 
-- **Safety pacing** — fixed delays between actions reduce ban risk and make failures debuggable.  
-- **Registry-based session lookup** — isolation bugs are worse than downtime; resolve identity before acting.  
-- **Live vs test discipline** — production accounts are sacred; test content never ships there.  
+- **Safety pacing** — fixed delays between actions reduce ban risk and make failures debuggable.
+- **Registry-based session lookup** — isolation bugs are worse than downtime; resolve identity before acting.
+- **Live vs test discipline** — production accounts are sacred; test content never ships there.
 - **Browser automation as a last mile** — when APIs are insufficient, Playwright-style control is a product necessity, not a hack.
 
 ## Stack

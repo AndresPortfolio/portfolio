@@ -2,21 +2,21 @@
 
 ## Problem
 
-Inbound interest in a Telegram business channel mixed tire-kickers with real buyers. I needed structured qualification, persistent lead storage, and alerts when someone was hot — without a full CRM.
+Inbound interest mixed tire-kickers with real buyers. I needed structured qualification, persistent lead storage, and alerts when someone was hot — without a full CRM.
 
 ## What I built
 
 A sales funnel bot that:
 
-- Runs qualification conversations  
-- Stores leads in SQLite  
-- Flags hot leads to an operator inbox  
-- Stays simple enough to run as a supervised long-lived service  
+- Runs qualification conversations
+- Stores leads in SQLite
+- Flags hot leads to an operator inbox
+- Stays simple enough to run as a supervised long-lived service
 
 ## Architecture (high level)
 
 ```
-Prospect (Telegram)
+Prospect (messaging client)
       │
       ▼
 Sales bot (conversation state)
@@ -28,14 +28,14 @@ Sales bot (conversation state)
 
 ## Decisions that mattered
 
-- **SQLite is enough** — early funnel volume doesn’t need a distributed DB; durability and simplicity win.  
-- **Hot-lead alerts beat dashboards** — operators respond to pings, not empty analytics pages.  
-- **Business-chat native** — meet prospects where they already are.  
+- **SQLite is enough** — early funnel volume doesn’t need a distributed DB; durability and simplicity win.
+- **Hot-lead alerts beat dashboards** — operators respond to pings, not empty analytics pages.
+- **Meet prospects where they already are** — run the funnel inside the messaging surface they use.
 - **Keep the script editable** — qualification criteria change; don’t bury them in unreachable code.
 
 ## Stack
 
-Python · python-telegram-bot · SQLite · dotenv-based config · launchd-style supervision
+Python · messaging bot framework · SQLite · dotenv-based config · launchd-style supervision
 
 ## Skills demonstrated
 

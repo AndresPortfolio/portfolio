@@ -21,7 +21,7 @@ class Probe:
 
 
 DEFAULT_PROBES = (
-    Probe("tenant-bot", "http://127.0.0.1:8080/health"),
+    Probe("messaging-bot", "http://127.0.0.1:8080/health"),
 )
 
 

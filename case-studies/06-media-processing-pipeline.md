@@ -8,10 +8,10 @@ Distribution workflows often need batch media transforms — uniqueness passes, 
 
 A service that:
 
-- Accepts batches of media  
-- Applies deterministic image/video-oriented transforms  
-- Emits outputs suitable for downstream social distribution  
-- Can be driven from chat or local operators  
+- Accepts batches of media
+- Applies deterministic image/video-oriented transforms
+- Emits outputs suitable for downstream distribution
+- Can be driven from chat or local operators
 
 ## Architecture (high level)
 
@@ -31,14 +31,14 @@ Downstream publish / storage handoff
 
 ## Decisions that mattered
 
-- **Batch-first UX** — operators think in folders and drops, not single-file forms.  
-- **Deterministic transforms** — reproducibility beats “magic” when debugging why an asset failed platform checks.  
-- **Keep it a service** — same pipeline callable from bots or scripts, not a one-off notebook.  
+- **Batch-first UX** — operators think in folders and drops, not single-file forms.
+- **Deterministic transforms** — reproducibility beats “magic” when debugging why an asset failed platform checks.
+- **Keep it a service** — same pipeline callable from bots or scripts, not a one-off notebook.
 - **No secrets in media paths** — treat filenames and side-car metadata as potentially sensitive.
 
 ## Stack
 
-Python · Pillow · Telegram bot glue · supervised service packaging
+Python · Pillow · messaging bot glue · supervised service packaging
 
 ## Skills demonstrated
 

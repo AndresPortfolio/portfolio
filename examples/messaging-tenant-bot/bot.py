@@ -1,9 +1,11 @@
 """
-Generic multi-tenant Telegram bot skeleton.
+Generic multi-tenant messaging bot skeleton.
 
 Sanitized teaching example — not production source.
 Shows: tenant resolution, handler layering, allowlisted admin actions,
 and a tiny health endpoint a supervisor can poke.
+
+Concrete SDK: python-telegram-bot (swap the adapter in a real product).
 """
 
 from __future__ import annotations
