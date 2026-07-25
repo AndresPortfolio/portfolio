@@ -19,7 +19,7 @@ from threading import Thread
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
-from tenants import Tenant, resolve_tenant
+from tenants import TenantError, require_feature, require_tenant, resolve_tenant
 
 logging.basicConfig(
     format="%(asctime)s %(levelname)s %(name)s %(message)s",
@@ -59,9 +59,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user = update.effective_user
-    tenant = resolve_tenant(user.id if user else None)
-    if tenant is None:
-        await update.message.reply_text("No tenant mapping for your user id.")
+    try:
+        tenant = require_tenant(user.id if user else None)
+        require_feature(tenant, "status")
+    except TenantError as exc:
+        await update.message.reply_text(f"Denied: {exc}")
         return
 
     await update.message.reply_text(
@@ -69,10 +71,23 @@ async def status(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             [
                 f"tenant_id: {tenant.tenant_id}",
                 f"plan: {tenant.plan}",
-                f"features: {', '.join(tenant.features) or '(none)'}",
+                f"seats: {tenant.seat_limit}",
+                f"features: {', '.join(sorted(tenant.features)) or '(none)'}",
             ]
         )
     )
+
+
+async def export_cmd(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Pro-plan feature gate example."""
+    user = update.effective_user
+    try:
+        tenant = require_tenant(user.id if user else None)
+        require_feature(tenant, "exports")
+    except TenantError as exc:
+        await update.message.reply_text(f"Denied: {exc}")
+        return
+    await update.message.reply_text(f"[{tenant.tenant_id}] export queued (demo)")
 
 
 async def admin_ping(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -127,6 +142,7 @@ def main() -> None:
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("status", status))
+    app.add_handler(CommandHandler("export", export_cmd))
     app.add_handler(CommandHandler("admin_ping", admin_ping))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, unknown_text))
 

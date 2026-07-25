@@ -1,13 +1,26 @@
-# Health board snippet
+# Health board
 
-Minimal “fleet board” pattern: probe local health endpoints and print a one-line status strip.
+Concurrent fleet probe with retries, latency, and JSON output.
 
 ```bash
-# with the tenant-bot example running:
-python check.py
+cd examples/health-board
 
-# or pass extra probes:
-python check.py api=http://127.0.0.1:8090/health worker=http://127.0.0.1:8091/health
+# defaults (expect services on :8080 / :8090 — or pass your own)
+python check.py messaging-bot=http://127.0.0.1:8080/health
+
+# JSON for an ops agent / dashboard ingest
+python check.py --json api=http://127.0.0.1:8090/health worker=http://127.0.0.1:8091/health
+
+# exit 1 on degraded as well as down
+python check.py --strict messaging-bot=http://127.0.0.1:8080/health
 ```
 
-Exit code `0` only when every probe reports ok — handy for cron / launchd.
+Optional config file (`probes.json`):
+
+```json
+[{"name": "api", "url": "http://127.0.0.1:8090/health"}]
+```
+
+```bash
+python check.py --config probes.json
+```

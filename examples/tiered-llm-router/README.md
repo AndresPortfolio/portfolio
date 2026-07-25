@@ -1,17 +1,19 @@
 # Tiered LLM router
 
-Shows the **fast → deep** escalation pattern used in ops agents:
-
-1. Ask a cheap/fast model first
-2. If confidence is low, escalate to a stronger model
-3. Keep the interface identical so callers don’t care which tier answered
-
-Default backends are offline stubs — no API keys needed.
+Fast model first, escalate to a deeper model on low confidence / hard prompts.
+Retries + transcript log included.
 
 ```bash
 cd examples/tiered-llm-router
+
+# offline stubs (no keys)
 python router.py "restart the billing worker"
-python router.py --long
+python router.py --long --transcript /tmp/route.json
+
+# optional live OpenAI-compatible endpoint
+export LLM_API_KEY=...
+export LLM_BASE_URL=...   # e.g. your provider's /v1 base URL
+python router.py --live "summarize pod restarts"
 ```
 
-Swap `FastStub` / `DeepStub` for OpenAI-compatible clients in a real deploy.
+Stdlib only for the offline path.

@@ -44,10 +44,13 @@ Sanitized, runnable sketches — safe to clone and poke at:
 
 | Example | What it demonstrates |
 |---------|----------------------|
-| [messaging-tenant-bot](examples/messaging-tenant-bot/) | Multi-tenant messaging bot: user→tenant resolution, allowlisted admin commands, `/health` for supervisors |
-| [health-board](examples/health-board/) | Tiny fleet status probe — one-line board + non-zero exit when something is down |
-| [tiered-llm-router](examples/tiered-llm-router/) | Fast→deep model escalation for ops agents (offline stubs, no API keys) |
-| [sqlite-lead-funnel](examples/sqlite-lead-funnel/) | Lightweight lead capture, scoring, and hot-lead listing on SQLite |
+| [messaging-tenant-bot](examples/messaging-tenant-bot/) | Multi-tenant messaging bot with feature gates, admin allowlist, `/health` |
+| [health-board](examples/health-board/) | Concurrent fleet probes with retries, latency, JSON + exit codes |
+| [tiered-llm-router](examples/tiered-llm-router/) | Fast→deep LLM escalation, retries, transcript log (optional live API) |
+| [sqlite-lead-funnel](examples/sqlite-lead-funnel/) | Multi-step intake state machine, scoring, hot-lead digest |
+| [async-tenant-db](examples/async-tenant-db/) | SQLAlchemy async tenant store (SQLite locally, Postgres-ready DSN) |
+| [delayed-job-queue](examples/delayed-job-queue/) | Delayed jobs with leases, retries, and dead-lettering |
+| [browser-form-runner](examples/browser-form-runner/) | Playwright form fill/submit against a local HTML fixture |
 
 ---
 

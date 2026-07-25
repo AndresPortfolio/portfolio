@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Local onboarding fixture</title>
+  </head>
+  <body>
+    <h1>Workspace onboarding</h1>
+    <form id="onboard">
+      <label>Workspace <input id="workspace" name="workspace" /></label>
+      <label>Email <input id="email" name="email" type="email" /></label>
+      <button type="submit" id="submit">Create</button>
+    </form>
+    <p id="result" hidden></p>
+    <script>
+      document.getElementById("onboard").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const workspace = document.getElementById("workspace").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const result = document.getElementById("result");
+        if (!workspace || !email) {
+          result.hidden = false;
+          result.textContent = "Missing fields";
+          return;
+        }
+        result.hidden = false;
+        result.textContent = `created:${workspace}:${email}`;
+      });
+    </script>
+  </body>
+</html>
