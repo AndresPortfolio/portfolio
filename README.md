@@ -4,7 +4,7 @@ Architecture writeups from production systems I’ve designed, built, and operat
 
 Focus areas: **creator SaaS**, **multi-tenant platforms**, **Telegram product surfaces**, **ops automation**, and **AI-assisted tooling**.
 
-This repo is documentation-only. It describes *what* was built and *how it was shaped* — not proprietary source, credentials, infrastructure addresses, or client data.
+Writeups describe *what* was built and *how it was shaped*. The `examples/` folder has small, runnable skeletons that show the patterns — not proprietary production source, credentials, infrastructure addresses, or client data.
 
 ---
 
@@ -38,6 +38,17 @@ This repo is documentation-only. It describes *what* was built and *how it was s
 
 ---
 
+## Code examples
+
+Sanitized, runnable sketches — safe to clone and poke at:
+
+| Example | What it demonstrates |
+|---------|----------------------|
+| [telegram-tenant-bot](examples/telegram-tenant-bot/) | Multi-tenant Telegram bot: user→tenant resolution, allowlisted admin commands, `/health` for supervisors |
+| [health-board](examples/health-board/) | Tiny fleet status probe — one-line board + non-zero exit when something is down |
+
+---
+
 ## How to read this
 
 Each writeup covers:
@@ -47,7 +58,7 @@ Each writeup covers:
 - **Decisions** — trade-offs that mattered in production  
 - **Skills demonstrated** — concrete engineering signals  
 
-Intentionally omitted: source code, env files, secrets, hostnames, IPs, domains, client identities, and anything NSFW or platform-restricted.
+Intentionally omitted: production source, real secrets, hostnames, IPs, domains, client identities, and anything NSFW or platform-restricted.
 
 See [OMISSIONS.md](OMISSIONS.md).
 
