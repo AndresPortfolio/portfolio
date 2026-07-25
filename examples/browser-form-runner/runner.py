@@ -1,8 +1,11 @@
 """
 Playwright form runner against a local HTML fixture.
 
-Demonstrates browser automation for flows without a clean public API:
-open page → fill fields → submit → assert result text.
+What this demonstrates:
+- Browser automation for flows without a clean public API
+- open page → fill fields → submit → assert result text
+
+How to run: see README.md in this folder.
 """
 
 from __future__ import annotations

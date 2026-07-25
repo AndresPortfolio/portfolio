@@ -1,7 +1,13 @@
 # Async tenant store
 
-SQLAlchemy 2.0 async models + tenant-scoped lookups on SQLite.
-Production swap: point the DSN at `postgresql+asyncpg://...`.
+## What this demonstrates
+
+- SQLAlchemy 2.0 async models and sessions
+- Tenant-scoped user resolution
+- Plan entitlement checks (`require-plan`)
+- Local SQLite DSN with a Postgres-ready swap path (`postgresql+asyncpg://...`)
+
+## How to run
 
 ```bash
 cd examples/async-tenant-db
@@ -11,7 +17,7 @@ pip install -r requirements.txt
 python store.py init
 python store.py seed
 python store.py resolve user-1001
-python store.py require-plan user-1002 --min pro   # should deny
-python store.py require-plan user-1001 --min pro   # should allow
+python store.py require-plan user-1002 --min pro   # deny
+python store.py require-plan user-1001 --min pro   # allow
 python store.py members acme
 ```

@@ -1,6 +1,15 @@
 # Delayed job queue
 
-SQLite-backed queue with `run_at` delays, worker leases, retries, and dead-lettering.
+## What this demonstrates
+
+- Delayed execution via `run_at`
+- Worker leases / claim semantics
+- Retry with backoff and dead-lettering after max attempts
+- Simple publish/notify handlers as stand-ins for real work
+
+SQLite-backed; no Redis/Celery required.
+
+## How to run
 
 ```bash
 cd examples/delayed-job-queue

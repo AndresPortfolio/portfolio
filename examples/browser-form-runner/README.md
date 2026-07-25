@@ -1,6 +1,12 @@
 # Browser form runner
 
-Playwright automation against a **local** HTML fixture (no external sites).
+## What this demonstrates
+
+- Playwright automation for flows without a clean public API
+- Fill → submit → assert result text
+- Local HTML fixture via `file://` (no external sites)
+
+## How to run
 
 ```bash
 cd examples/browser-form-runner
@@ -11,5 +17,3 @@ playwright install chromium
 python runner.py
 python runner.py --workspace northwind --email ops@northwind.example
 ```
-
-Uses `fixture.html` via a `file://` URL — good for CI-style smoke tests of form flows.
