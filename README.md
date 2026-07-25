@@ -46,6 +46,8 @@ Sanitized, runnable sketches — safe to clone and poke at:
 |---------|----------------------|
 | [messaging-tenant-bot](examples/messaging-tenant-bot/) | Multi-tenant messaging bot: user→tenant resolution, allowlisted admin commands, `/health` for supervisors |
 | [health-board](examples/health-board/) | Tiny fleet status probe — one-line board + non-zero exit when something is down |
+| [tiered-llm-router](examples/tiered-llm-router/) | Fast→deep model escalation for ops agents (offline stubs, no API keys) |
+| [sqlite-lead-funnel](examples/sqlite-lead-funnel/) | Lightweight lead capture, scoring, and hot-lead listing on SQLite |
 
 ---
 
